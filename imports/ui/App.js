@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-
 import { Tasks } from '../api/tasks.js';
 
 import Task from './Task.js';
 import AccountsUIWrapper from './AccountsUIWrapper.js';
+import MapUIwrapper from './MapUIWrapper.js';
 
 // App component - represents the whole app
 class App extends Component {
@@ -17,6 +17,7 @@ class App extends Component {
       hideCompleted: false,
     };
   }
+
 
   handleSubmit(event) {
     event.preventDefault();
@@ -37,10 +38,13 @@ class App extends Component {
   }
 
   renderTasks() {
+    
+
     let filteredTasks = this.props.tasks;
     if (this.state.hideCompleted) {
       filteredTasks = filteredTasks.filter(task => !task.checked);
     }
+
     return filteredTasks.map((task) => {
       const currentUserId = this.props.currentUser && this.props.currentUser._id;
       const showPrivateButton = task.owner === currentUserId;
@@ -59,17 +63,7 @@ class App extends Component {
     return (
       <div className="container">
         <header>
-          <h1>Todo List ({this.props.incompleteCount})</h1>
-
-          <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed Tasks
-          </label>
+          <h1>TomTom Guide ({this.props.incompleteCount})</h1>
 
           <AccountsUIWrapper />
 
@@ -78,15 +72,26 @@ class App extends Component {
               <input
                 type="text"
                 ref="textInput"
-                placeholder="Type to add new tasks"
+                placeholder="Source"
+              />
+
+              <input
+                type="text"
+                ref="textInput"
+                placeholder="Destination"
               />
             </form> : ''
           }
         </header>
+        <MapUIwrapper />
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        
 
-        <ul>
-          {this.renderTasks()}
-        </ul>
+        
+        
+          
       </div>
     );
   }

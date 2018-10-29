@@ -124,3 +124,8 @@ header .hide-completed {
     padding-bottom: 5px;
   }
 }
+
+#map {
+  width: 600px;
+  height: 100vh;
+}
