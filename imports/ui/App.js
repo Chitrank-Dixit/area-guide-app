@@ -66,22 +66,6 @@ class App extends Component {
           <h1>TomTom Guide ({this.props.incompleteCount})</h1>
 
           <AccountsUIWrapper />
-
-          { this.props.currentUser ?
-            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Source"
-              />
-
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Destination"
-              />
-            </form> : ''
-          }
         </header>
         <MapUIwrapper />
         <noscript>
